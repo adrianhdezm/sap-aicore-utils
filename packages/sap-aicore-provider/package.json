@@ -45,9 +45,9 @@
   },
   "dependencies": {
     "@ai-foundry/sap-aicore-nano-sdk": "workspace:*",
-    "@ai-sdk/openai-compatible": "^2.0.26",
-    "@ai-sdk/provider": "^3.0.7",
-    "@ai-sdk/provider-utils": "^4.0.13",
+    "@ai-sdk/openai-compatible": "^2.0.30",
+    "@ai-sdk/provider": "^3.0.8",
+    "@ai-sdk/provider-utils": "^4.0.15",
     "zod": "^4.3.6"
   }
 }
