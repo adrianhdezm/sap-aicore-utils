@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "mastra": "^1.1.0",
+    "mastra": "^1.3.12",
     "tsx": "catalog:",
     "typescript": "catalog:"
   }
