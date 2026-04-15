@@ -4,8 +4,8 @@ packages:
   - scripts
 
 catalog:
-  '@types/node': ^24.10.10
-  ai: ^6.0.69
+  '@types/node': ^24.12.2
+  ai: ^6.0.160
   tsx: ^4.20.6
   typescript: ^5.9.3
 

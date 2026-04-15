@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@ai-foundry/sap-aicore-provider": "workspace:*",
-    "@mastra/core": "^1.1.0",
-    "@mastra/evals": "^1.0.1",
-    "@mastra/libsql": "^1.1.0",
-    "@mastra/loggers": "^1.0.1",
-    "@mastra/memory": "^1.0.1",
-    "@mastra/observability": "^1.1.0",
+    "@mastra/core": "^1.24.1",
+    "@mastra/evals": "^1.2.1",
+    "@mastra/libsql": "^1.8.0",
+    "@mastra/loggers": "^1.1.1",
+    "@mastra/memory": "^1.15.0",
+    "@mastra/observability": "^1.9.0",
     "ai": "catalog:",
     "zod": "^4.3.6"
   },

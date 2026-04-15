@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@ai-foundry/sap-aicore-provider": "workspace:*",
-    "@openai/agents": "^0.4.5",
-    "@openai/agents-extensions": "^0.4.5"
+    "@openai/agents": "^0.8.3",
+    "@openai/agents-extensions": "^0.8.3"
   },
   "devDependencies": {
     "@types/node": "catalog:",
