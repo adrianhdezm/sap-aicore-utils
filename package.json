@@ -29,6 +29,6 @@
     "ci:check": "pnpm run build && pnpm run format && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.8.3"
   }
 }
