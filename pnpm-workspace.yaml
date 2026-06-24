@@ -26,6 +26,9 @@ allowBuilds:
 
 shellEmulator: true
 
+overrides:
+  js-yaml: '>=4.2.0'
+
 minimumReleaseAgeExclude:
   - '@mastra/core@1.46.0'
   - '@mastra/deployer@1.46.0'
