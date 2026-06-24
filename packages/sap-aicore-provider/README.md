@@ -9,7 +9,7 @@ This package enables seamless integration of SAP AI Core Foundation Models with 
 ## Installation
 
 ```sh
-npm install @ai-foundry/sap-aicore-provider ai
+pnpm add @ai-foundry/sap-aicore-provider ai
 ```
 
 ## Usage
@@ -36,14 +36,12 @@ You can configure the SAP AI Core provider using the `createSapAiCoreProvider` f
 import { createSapAiCoreProvider } from '@ai-foundry/sap-aicore-provider';
 
 const sapAiCore = createSapAiCoreProvider({
-  headers: {
-    'Custom-Header': 'value' // Optional: Add any custom headers
-  },
-  baseUrl: 'https://my-sap-aicore-endpoint.com', // Optional: Custom base URL
-  resourceGroup: 'my-resource-group', // Optional: Specify the resource group
-  accessTokenUrl: 'https://my-auth-url.com/oauth2/token' // Optional: Custom token URL,
-  clientId: 'my-client-id', // Optional: Client ID for authentication
-  clientSecret: 'my-client-secret' // Optional: Client Secret for authentication
+  baseUrl: 'https://my-sap-aicore-endpoint.com',
+  accessTokenUrl: 'https://my-auth-url.com',
+  clientId: 'my-client-id',
+  clientSecret: 'my-client-secret',
+  resourceGroup: 'my-resource-group', // Optional: defaults to 'default'
+  headers: { 'Custom-Header': 'value' } // Optional: additional request headers
 });
 ```
 
@@ -55,8 +53,9 @@ You can also provide configuration values using environment variables:
 - `AICORE_AUTH_URL`
 - `AICORE_CLIENT_ID`
 - `AICORE_CLIENT_SECRET`
+- `AICORE_RESOURCE_GROUP` (optional, defaults to `default`)
 
-Tokens are cached for one hour by default to reduce token provider requests.
+OAuth tokens are cached until their JWT `exp` claim expires, minimising token requests.
 
 ## License
 

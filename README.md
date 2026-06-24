@@ -29,7 +29,8 @@ pnpm run build
 pnpm run ci:check     # Full CI validation
 pnpm run build        # Build all packages with tsup
 pnpm run test         # Run vitest tests
-pnpm run lint         # TypeScript type checking
+pnpm run typecheck    # TypeScript type checking
+pnpm run lint         # ESLint across all packages
 pnpm run format       # Format with Prettier
 pnpm run format:check # Check formatting
 ```

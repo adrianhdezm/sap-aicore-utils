@@ -14,7 +14,7 @@ It is intended for low-level integration or as a building block for higher-level
 ## Installation
 
 ```sh
-npm install @ai-foundry/sap-aicore-nano-sdk
+pnpm add @ai-foundry/sap-aicore-nano-sdk
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ const client = new SapAiCoreApiClient({
 });
 
 const accessToken = await client.getAccessToken();
-const deploymentUrl = await client.getDeploymentUrl('sap-aicore/gpt-4o');
+const deploymentUrl = await client.getDeploymentUrl('gpt-4o');
 ```
 
 ## API
@@ -49,9 +49,9 @@ Constructor parameters:
 Methods:
 
 - `getAccessToken(): Promise<string>`
-  - Fetches and caches a bearer token. Tokens are cached for ~55 minutes.
+  - Fetches a bearer token via client-credentials grant and caches it until the JWT `exp` claim expires.
 - `getDeploymentUrl(modelId: string): Promise<string>`
-  - Resolves a model ID to a running deployment URL and caches the result.
+  - Resolves a bare model ID (e.g. `gpt-4o`) to a running deployment URL and caches the result indefinitely for the lifetime of the client instance.
 
 ## License
 
@@ -59,4 +59,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Please open issues or pull requests on GitHub.
+Contributions are welcome! Please open issues or pull requests on [GitHub](https://github.com/adrianhdezm/sap-aicore-utils).
