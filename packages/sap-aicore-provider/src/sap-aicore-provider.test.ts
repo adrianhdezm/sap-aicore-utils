@@ -57,10 +57,12 @@ describe('createSapAiCoreProvider', () => {
     vi.clearAllMocks();
     requestInterceptors.length = 0;
     apiClientConstructorArgs.length = 0;
-    mockLoadSetting.mockImplementation(({ settingValue, environmentVariableName }) => {
-      return settingValue ?? `env:${environmentVariableName}`;
-    });
-    mockLoadOptionalSetting.mockImplementation(({ settingValue }) => settingValue);
+    mockLoadSetting.mockImplementation(
+      ({ settingValue, environmentVariableName }: { settingValue?: string; environmentVariableName: string }) => {
+        return settingValue ?? `env:${environmentVariableName}`;
+      }
+    );
+    mockLoadOptionalSetting.mockImplementation(({ settingValue }: { settingValue?: string }) => settingValue);
   });
 
   it('creates chat models with expected configuration and headers', () => {

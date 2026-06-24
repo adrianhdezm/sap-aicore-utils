@@ -1,25 +1,7 @@
 {
+  "extends": "@ai-foundry/typescript-config/tsconfig.base.json",
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-
-    // ...other options
-    "lib": ["es2022"],
-    "types": ["node"],
-    "noEmit": true,
-    "module": "Preserve"
+    "noEmit": true
   },
   "include": ["src/**/*.ts"]
 }

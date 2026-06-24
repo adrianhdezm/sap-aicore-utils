@@ -32,13 +32,16 @@
   "scripts": {
     "build": "tsup",
     "exports:check": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "lint": "tsc",
+    "lint": "tsc && eslint .",
     "test": "vitest run",
     "ci:check": "pnpm run build && pnpm run exports:check && pnpm run lint && pnpm run test"
   },
   "devDependencies": {
+    "@ai-foundry/eslint-config": "workspace:*",
+    "@ai-foundry/typescript-config": "workspace:*",
     "@arethetypeswrong/cli": "^0.18.2",
     "@types/node": "catalog:",
+    "eslint": "catalog:",
     "tsup": "^8.5.1",
     "typescript": "catalog:",
     "vitest": "^4.0.18"
