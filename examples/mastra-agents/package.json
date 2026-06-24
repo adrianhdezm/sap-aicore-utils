@@ -13,7 +13,6 @@
     "@ai-foundry/sap-aicore-provider": "workspace:*",
     "@mastra/core": "^1.46.0",
     "@mastra/evals": "^1.4.0",
-    "@mastra/libsql": "^1.14.1",
     "@mastra/memory": "^1.21.1",
     "ai": "catalog:",
     "zod": "^4.4.3"
