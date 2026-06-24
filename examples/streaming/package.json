@@ -5,7 +5,7 @@
   "description": "Streaming example using SAP AI Core Provider with streamText",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env --import=tsx src/index.ts"
+    "start": "node --env-file=../../.env --import=tsx src/index.ts"
   },
   "dependencies": {
     "@ai-foundry/sap-aicore-provider": "workspace:*",
