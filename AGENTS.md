@@ -15,7 +15,8 @@ pnpm run ci:check
 # Individual commands
 pnpm run build        # Build all packages with tsup
 pnpm run test         # Run vitest tests
-pnpm run lint         # TypeScript type checking
+pnpm run typecheck    # TypeScript type checking
+pnpm run lint         # ESLint across all packages
 pnpm run format       # Format with Prettier
 pnpm run format:check # Check formatting
 
@@ -35,6 +36,8 @@ pnpm --filter @ai-foundry/sap-aicore-provider exports:check
 
 - `packages/sap-aicore-provider/` - Main Vercel AI SDK provider package for SAP AI Core (`@ai-foundry/sap-aicore-provider`)
 - `packages/sap-aicore-nano-sdk/` - Lightweight SDK helpers for SAP AI Core (`@ai-foundry/sap-aicore-nano-sdk`)
+- `tools/eslint-config/` - Shared ESLint v10 flat config (`@ai-foundry/eslint-config`)
+- `tools/typescript-config/` - Shared TypeScript base config (`@ai-foundry/typescript-config`)
 - `examples/basic/` - Basic usage example with `generateText`
 - `examples/streaming/` - Streaming example with `streamText`
 - `examples/mastra-agents/` - Example using Mastra Agents with SAP AI Core
@@ -44,37 +47,38 @@ pnpm --filter @ai-foundry/sap-aicore-provider exports:check
 
 **Provider Factory** ([sap-aicore-provider.ts](packages/sap-aicore-provider/src/sap-aicore-provider.ts))
 
-- `createSapAiCore()` - Factory function that configures and returns a Vercel AI SDK v3-compatible provider
-- `sapAiCore` - Default instance export for simple usage
+- `createSapAiCoreProvider()` - Factory function that configures and returns a Vercel AI SDK v3-compatible provider
+- `sapAiCore` - Default instance exported from `index.ts` for simple usage
 - Only chat models are supported; other model types throw `NoSuchModelError`
 
-**API Client** ([sap-aicore-nano-sdk.ts](packages/sap-aicore-nano-sdk/src/sap-aicore-nano-sdk.ts))
+**API Client** ([sap-aicore-api-client.ts](packages/sap-aicore-nano-sdk/src/sap-aicore-api-client.ts))
 
-- Handles OAuth 2.0 client credentials authentication with token caching
-- Resolves model IDs to deployment URLs via SAP AI Core API
-- Caches deployment URLs to minimize API calls
+- Handles OAuth 2.0 client credentials authentication with token caching (cached until JWT `exp` claim)
+- Resolves bare model IDs (e.g. `gpt-4o`) to deployment URLs via SAP AI Core API
+- Caches deployment URLs for the lifetime of the client instance
 
 **Request Interceptors** ([fetch-with-interceptors.ts](packages/sap-aicore-provider/src/lib/fetch-with-interceptors.ts))
 
 - Custom fetch wrapper that chains request interceptors
-- Injects Authorization headers with Bearer tokens
-- Resolves `<deployment:modelId>` URL placeholders to actual deployment URLs
+- Each model instance gets its own interceptor chain via `createChatModel`
+- First interceptor injects Authorization header with Bearer token
+- Second interceptor resolves the deployment URL using the closed-over model ID
 
 ### Request Flow
 
-1. User calls `sapAiCore('sap-aicore/gpt-4o')` to get a model instance
-2. Model requests go through `fetchWithInterceptors`
-3. First interceptor adds OAuth Bearer token (fetched/cached by API client)
-4. Second interceptor resolves `<deployment:modelId>` placeholder to actual deployment URL
-5. Request is sent to SAP AI Core with proper authentication
+1. User calls `provider('sap-aicore/gpt-4o')` or `provider.chat('sap-aicore/gpt-4o')` to get a model instance
+2. `createChatModel` strips the `sap-aicore/` prefix and creates a per-model fetch interceptor chain
+3. On each request, the first interceptor fetches/caches an OAuth Bearer token and injects it
+4. The second interceptor resolves the bare model ID to a deployment URL and rewrites the request URL
+5. Request is sent to SAP AI Core with proper authentication and headers
 
 ### Environment Variables
 
 - `AICORE_BASE_URL` - SAP AI Core base URL
-- `AICORE_AUTH_URL` - OAuth token endpoint
+- `AICORE_AUTH_URL` - OAuth token endpoint base URL
 - `AICORE_CLIENT_ID` - OAuth client ID
 - `AICORE_CLIENT_SECRET` - OAuth client secret
-- `AICORE_RESOURCE_GROUP` - Optional resource group (defaults to "default")
+- `AICORE_RESOURCE_GROUP` - Optional resource group (defaults to `default`)
 
 ## Commit Guidelines
 
@@ -102,3 +106,4 @@ Always run `pnpm run ci:check` before committing.
 - Dual CJS/ESM output via tsup
 - Uses `@ai-sdk/openai-compatible` for OpenAI protocol compatibility
 - Azure OpenAI API version: `2025-04-01-preview`
+- ESLint v10 flat config with `typescript-eslint` `recommendedTypeChecked` rules
