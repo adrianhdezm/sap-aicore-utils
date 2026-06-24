@@ -1,4 +1,4 @@
-import { aisdk } from '@openai/agents-extensions';
+import { aisdk } from '@openai/agents-extensions/ai-sdk';
 import { sapAiCore } from '@ai-foundry/sap-aicore-provider';
 import { Agent, run, setTracingDisabled } from '@openai/agents';
 
