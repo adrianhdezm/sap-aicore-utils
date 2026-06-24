@@ -28,6 +28,7 @@ shellEmulator: true
 
 overrides:
   js-yaml: '>=4.2.0'
+  esbuild: '>=0.28.1'
 
 minimumReleaseAgeExclude:
   - '@mastra/core@1.46.0'
