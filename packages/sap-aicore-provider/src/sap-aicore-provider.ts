@@ -183,5 +183,3 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
 
   return provider;
 }
-
-export const sapAiCore = createSapAiCoreProvider();
