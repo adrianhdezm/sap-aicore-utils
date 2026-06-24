@@ -9,17 +9,16 @@ Mastra agents wired to SAP AI Core through the provider.
 
 ## Configure
 
-Mastra loads `.env` from the example directory, not the repo root. Copy the root `.env.example` here:
+Mastra loads `.env` from the example directory, not the repo root. After filling in your credentials in the root `.env`, copy it here:
 
 ```bash
-cp ../../.env.example examples/mastra-agents/.env
-# then fill in your credentials
+cp .env examples/mastra-agents/.env
 ```
 
 Or from within the example directory:
 
 ```bash
-cp ../../.env.example .env
+cp ../../.env .env
 ```
 
 ## Run
