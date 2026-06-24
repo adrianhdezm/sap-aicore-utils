@@ -21,7 +21,7 @@
   "homepage": "https://github.com/adrianhdezm/sap-aicore-utils#readme",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r run build",
+    "build": "pnpm -r --filter '!./examples/**' run build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "pnpm -r run typecheck",
