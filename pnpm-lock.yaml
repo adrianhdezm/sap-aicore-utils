@@ -186,13 +186,13 @@ importers:
         specifier: workspace:*
         version: link:../sap-aicore-nano-sdk
       '@ai-sdk/openai-compatible':
-        specifier: ^2.0.46
+        specifier: ^2.0.51
         version: 2.0.51(zod@4.4.3)
       '@ai-sdk/provider':
         specifier: ^3.0.10
         version: 3.0.10
       '@ai-sdk/provider-utils':
-        specifier: ^4.0.26
+        specifier: ^4.0.30
         version: 4.0.30(zod@4.4.3)
       zod:
         specifier: ^4.4.3
