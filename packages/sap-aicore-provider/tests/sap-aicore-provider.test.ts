@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { NoSuchModelError } from '@ai-sdk/provider';
-import { createSapAiCoreProvider, AZURE_OPENAI_API_VERSION } from './sap-aicore-provider.js';
+import { createSapAiCoreProvider, AZURE_OPENAI_API_VERSION } from '../src/sap-aicore-provider.js';
 import { OpenAICompatibleChatLanguageModel } from '@ai-sdk/openai-compatible';
 
 const mockOpenAICompatibleChatLanguageModel = vi.hoisted(() => vi.fn());
@@ -42,7 +42,7 @@ vi.mock('@ai-sdk/provider-utils', () => ({
   loadOptionalSetting: mockLoadOptionalSetting
 }));
 
-vi.mock('./lib/fetch-with-interceptors.js', () => ({
+vi.mock('../src/lib/fetch-with-interceptors.js', () => ({
   fetchWithInterceptors: mockFetchWithInterceptors
 }));
 

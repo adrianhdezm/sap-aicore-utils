@@ -12,7 +12,7 @@ export default defineConfig([
     }
   },
   {
-    files: ['src/**/*.test.ts'],
+    files: ['tests/**/*.test.ts'],
     rules: {
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',

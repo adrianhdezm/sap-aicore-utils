@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import { fetchWithInterceptors } from './fetch-with-interceptors.js';
+import { fetchWithInterceptors } from '../../src/lib/fetch-with-interceptors.js';
 
 describe('fetchWithInterceptors', () => {
   const mockResponse = new Response(JSON.stringify({ success: true }), { status: 200 });

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
-import { SapAiCoreApiClient, type SapAiCoreParams } from './sap-aicore-api-client.js';
+import { SapAiCoreApiClient, type SapAiCoreParams } from '../src/sap-aicore-api-client.js';
 
 // Helper to create a mock JWT token with a specific expiration time
 function createMockJwt(exp: number): string {

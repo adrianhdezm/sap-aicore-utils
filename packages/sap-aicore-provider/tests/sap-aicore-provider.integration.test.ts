@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { createSapAiCoreProvider, AZURE_OPENAI_API_VERSION } from './sap-aicore-provider.js';
+import { createSapAiCoreProvider, AZURE_OPENAI_API_VERSION } from '../src/sap-aicore-provider.js';
 
 function createMockJwt(exp: number): string {
   const payload = btoa(JSON.stringify({ exp }));
