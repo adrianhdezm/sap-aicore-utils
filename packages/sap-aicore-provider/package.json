@@ -1,7 +1,7 @@
 {
   "name": "@ai-foundry/sap-aicore-provider",
   "description": "SAP AI Core Foundation Models provider plugin for Vercel AI SDK",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adrianhdezm/sap-aicore-utils.git",
