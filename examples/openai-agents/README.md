@@ -15,15 +15,6 @@ Copy `.env.example` to `.env` and fill in your SAP AI Core credentials:
 cp .env.example .env
 ```
 
-## Install and build
-
-From the repo root:
-
-```bash
-pnpm install
-pnpm run build
-```
-
 ## Run
 
 ```bash
