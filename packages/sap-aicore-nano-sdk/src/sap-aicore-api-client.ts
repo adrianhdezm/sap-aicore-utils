@@ -13,7 +13,7 @@ export class SapAiCoreApiClient {
   private readonly baseUrl: string;
   private resourceGroup: string = 'default';
   private accessToken: string | null = null;
-  private expiresAt: string | null = null;
+  private expiresAt: number | null = null;
 
   private readonly scenarioId = 'foundation-models';
 
@@ -39,7 +39,7 @@ export class SapAiCoreApiClient {
 
   getAccessToken = async (): Promise<string> => {
     // Check if the access token is already available and not expired
-    if (this.accessToken && this.expiresAt && !(new Date(this.expiresAt).getTime() < Date.now())) {
+    if (this.accessToken && this.expiresAt && this.expiresAt > Date.now()) {
       return this.accessToken;
     }
 
@@ -62,10 +62,8 @@ export class SapAiCoreApiClient {
     }
 
     const payload = JSON.parse(atob(payloadBase64)) as { exp: number };
-    const expiresAt = new Date(payload.exp * 1000).toISOString();
-
     this.accessToken = accessToken;
-    this.expiresAt = expiresAt;
+    this.expiresAt = payload.exp * 1000;
 
     return accessToken;
   };
