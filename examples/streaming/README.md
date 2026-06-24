@@ -1,6 +1,6 @@
-# Basic Example
+# Streaming Example
 
-Minimal `generateText` usage with the SAP AI Core Provider and the Vercel AI SDK.
+`streamText` usage with the SAP AI Core Provider and the Vercel AI SDK.
 
 ## Prerequisites
 
@@ -27,10 +27,10 @@ pnpm run build
 ## Run
 
 ```bash
-pnpm --filter basic-example start
+pnpm --filter streaming-example start
 ```
 
-Expected output includes a `Response:` line and token `Usage` for the prompt sent in `src/index.ts`.
+Output streams token-by-token to the console, followed by a `--- Stream completed ---` line.
 
 ## Notes
 

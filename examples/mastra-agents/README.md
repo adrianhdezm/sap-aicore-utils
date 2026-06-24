@@ -9,14 +9,10 @@ Mastra agents wired to SAP AI Core through the provider.
 
 ## Configure
 
-Create a `.env` file in `examples/mastra-agents`:
+Copy `.env.example` to `.env` and fill in your SAP AI Core credentials:
 
 ```bash
-AICORE_BASE_URL=...
-AICORE_AUTH_URL=...
-AICORE_CLIENT_ID=...
-AICORE_CLIENT_SECRET=...
-AICORE_RESOURCE_GROUP=default
+cp .env.example .env
 ```
 
 ## Install and build
