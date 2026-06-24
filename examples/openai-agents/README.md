@@ -9,7 +9,7 @@ Shows how to run an `@openai/agents` agent backed by the SAP AI Core Provider.
 
 ## Configure
 
-Copy `.env.example` to `.env` and fill in your SAP AI Core credentials:
+Copy `.env.example` at the repo root to `.env` and fill in your SAP AI Core credentials:
 
 ```bash
 cp .env.example .env

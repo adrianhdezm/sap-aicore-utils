@@ -9,7 +9,7 @@ Minimal `generateText` usage with the SAP AI Core Provider and the Vercel AI SDK
 
 ## Configure
 
-Copy `.env.example` to `.env` and fill in your SAP AI Core credentials:
+Copy `.env.example` at the repo root to `.env` and fill in your SAP AI Core credentials:
 
 ```bash
 cp .env.example .env
