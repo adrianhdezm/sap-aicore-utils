@@ -2,7 +2,7 @@ import config from '@ai-foundry/eslint-config';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  { ignores: ['tsup.config.ts', 'vitest.config.js'] },
+  { ignores: ['tsup.config.ts'] },
   ...config,
   {
     languageOptions: {
