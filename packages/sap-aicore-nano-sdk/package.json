@@ -38,9 +38,11 @@
   "scripts": {
     "build": "tsup",
     "exports:check": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "lint": "tsc && eslint .",
+    "typecheck": "tsc",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest run",
-    "ci:check": "pnpm run build && pnpm run exports:check && pnpm run lint && pnpm run test"
+    "ci:check": "pnpm run build && pnpm run exports:check && pnpm run typecheck && pnpm run lint && pnpm run test"
   },
   "devDependencies": {
     "@ai-foundry/eslint-config": "workspace:*",

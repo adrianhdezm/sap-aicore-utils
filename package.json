@@ -24,9 +24,10 @@
     "build": "pnpm -r run build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "typecheck": "pnpm -r run typecheck",
     "lint": "pnpm -r run lint",
     "test": "pnpm -r run test",
-    "ci:check": "pnpm run build && pnpm run format && pnpm run lint && pnpm run test"
+    "ci:check": "pnpm run build && pnpm run format && pnpm run typecheck && pnpm run lint && pnpm run test"
   },
   "dependencies": {
     "prettier": "catalog:"
