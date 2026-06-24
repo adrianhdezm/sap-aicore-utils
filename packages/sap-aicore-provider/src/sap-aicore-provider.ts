@@ -80,19 +80,6 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
     ...options.headers
   });
 
-  const url = ({ path, modelId }: { path: string; modelId: string }) => {
-    const baseUrl = loadSetting({
-      settingValue: options.baseUrl,
-      environmentVariableName: 'AICORE_BASE_URL',
-      settingName: 'baseUrl',
-      description: 'SAP AI Core Base URL'
-    });
-    const url = new URL(`${baseUrl}/<deployment:${modelId}>${path}`);
-    // For openai models, we append the API version
-    url.searchParams.set('api-version', AZURE_OPENAI_API_VERSION);
-    return url.toString();
-  };
-
   const sapAiCoreApiClient = new SapAiCoreApiClient({
     clientId,
     clientSecret,
@@ -101,39 +88,30 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
     resourceGroup
   });
 
-  // Wrap the fetch function with token provider options
-  const { fetch, interceptors } = fetchWithInterceptors();
-  interceptors.request.use(async (req) => {
-    // Add Authorization header
-    const headers = new Headers(req.headers);
-    const token = await sapAiCoreApiClient.getAccessToken();
-    headers.set('Authorization', `Bearer ${token}`);
-    return new Request(req, { headers });
-  });
-  interceptors.request.use(async (req) => {
-    const url = decodeURIComponent(req.url);
-    // Set Deployment URL if not already set
-    if (url.includes('/<deployment:')) {
-      const modelIdMatch = url.match(/\/<deployment:([^>]+)>/);
-      if (modelIdMatch && modelIdMatch[1]) {
-        const modelId = modelIdMatch[1];
-        const deploymentUrl = await sapAiCoreApiClient.getDeploymentUrl(modelId);
-
-        const urlParts = url.split('/<deployment:' + modelId + '>');
-        const newUrl = deploymentUrl + urlParts[1];
-
-        return new Request(newUrl, req);
-      }
-    }
-    return req;
-  });
-
   const createChatModel = (modelId: SapAiCoreModelId) => {
+    const { fetch: modelFetch, interceptors } = fetchWithInterceptors();
+
+    interceptors.request.use(async (req) => {
+      const headers = new Headers(req.headers);
+      headers.set('Authorization', `Bearer ${await sapAiCoreApiClient.getAccessToken()}`);
+      return new Request(req, { headers });
+    });
+
+    interceptors.request.use(async (req) => {
+      const deploymentUrl = await sapAiCoreApiClient.getDeploymentUrl(modelId);
+      const u = new URL(req.url);
+      return new Request(deploymentUrl.replace(/\/$/, '') + u.pathname + u.search, req);
+    });
+
     return new OpenAICompatibleChatLanguageModel(modelId, {
       provider: 'sap-aicore.chat',
-      url,
+      url: ({ path }) => {
+        const u = new URL(`${baseUrl}${path}`);
+        u.searchParams.set('api-version', AZURE_OPENAI_API_VERSION);
+        return u.toString();
+      },
       headers: getHeaders,
-      fetch,
+      fetch: modelFetch,
       supportsStructuredOutputs: true,
       includeUsage: true
     });

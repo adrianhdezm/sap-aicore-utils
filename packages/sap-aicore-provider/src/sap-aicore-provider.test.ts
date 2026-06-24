@@ -88,9 +88,7 @@ describe('createSapAiCoreProvider', () => {
     expect(headers['X-Test']).toBe('true');
 
     const url = options.url({ path: '/chat/completions', modelId: 'gpt-4o' });
-    expect(decodeURIComponent(url)).toBe(
-      `https://aicore.example.com/<deployment:gpt-4o>/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`
-    );
+    expect(url).toBe(`https://aicore.example.com/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`);
   });
 
   it('defaults the resource group header when none is provided', () => {
@@ -163,17 +161,19 @@ describe('createSapAiCoreProvider', () => {
   });
 
   it('registers request interceptors for auth and deployment resolution', async () => {
-    createSapAiCoreProvider({
+    const provider = createSapAiCoreProvider({
       accessTokenUrl: 'https://auth.example.com',
       clientId: 'client-id',
       clientSecret: 'client-secret',
       baseUrl: 'https://aicore.example.com'
     });
 
+    provider('sap-aicore/gpt-4o');
+
     expect(requestInterceptors).toHaveLength(2);
 
-    const placeholderUrl = 'https://aicore.example.com/%3Cdeployment:gpt-4o%3E/chat/completions?api-version=2025-04-01-preview';
-    let request: Request = new Request(placeholderUrl, { headers: { 'X-Start': 'yes' } });
+    const baseUrl = `https://aicore.example.com/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`;
+    let request: Request = new Request(baseUrl, { headers: { 'X-Start': 'yes' } });
 
     for (const interceptor of requestInterceptors) {
       const result = await interceptor(request);
@@ -185,7 +185,7 @@ describe('createSapAiCoreProvider', () => {
     expect(mockGetAccessToken).toHaveBeenCalledTimes(1);
     expect(mockGetDeploymentUrl).toHaveBeenCalledWith('gpt-4o');
     expect(request.headers.get('Authorization')).toBe('Bearer token-123');
-    expect(request.url).toBe('https://deploy.example.com/chat/completions?api-version=2025-04-01-preview');
+    expect(request.url).toBe(`https://deploy.example.com/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`);
   });
 
   it('builds the API client with resolved settings', () => {
