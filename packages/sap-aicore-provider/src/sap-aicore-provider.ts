@@ -89,6 +89,7 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
   });
 
   const createChatModel = (modelId: SapAiCoreModelId) => {
+    const bareId = modelId.startsWith('sap-aicore/') ? modelId.replace('sap-aicore/', '') : modelId;
     const { fetch: modelFetch, interceptors } = fetchWithInterceptors();
 
     interceptors.request.use(async (req) => {
@@ -98,12 +99,12 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
     });
 
     interceptors.request.use(async (req) => {
-      const deploymentUrl = await sapAiCoreApiClient.getDeploymentUrl(modelId);
+      const deploymentUrl = await sapAiCoreApiClient.getDeploymentUrl(bareId);
       const u = new URL(req.url);
       return new Request(deploymentUrl.replace(/\/$/, '') + u.pathname + u.search, req);
     });
 
-    return new OpenAICompatibleChatLanguageModel(modelId, {
+    return new OpenAICompatibleChatLanguageModel(bareId, {
       provider: 'sap-aicore.chat',
       url: ({ path }) => {
         const u = new URL(`${baseUrl}${path}`);
@@ -126,7 +127,7 @@ export function createSapAiCoreProvider(options: SapAiCoreProviderSettings = {})
       throw new Error(`Invalid modelId: ${modelId}. Model IDs must start with 'sap-aicore/'.`);
     }
 
-    return createChatModel(modelId.replace('sap-aicore/', ''));
+    return createChatModel(modelId);
   };
 
   provider.specificationVersion = 'v3' as const;

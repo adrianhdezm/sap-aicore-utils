@@ -106,7 +106,7 @@ describe('createSapAiCoreProvider', () => {
     expect(headers['AI-Resource-Group']).toBe('default');
   });
 
-  it('provides a chat method that uses the model id as provided', () => {
+  it('provides a chat method that strips the prefix and uses the bare model id', () => {
     const provider = createSapAiCoreProvider({
       accessTokenUrl: 'https://auth.example.com',
       clientId: 'client-id',
@@ -114,7 +114,7 @@ describe('createSapAiCoreProvider', () => {
       baseUrl: 'https://aicore.example.com'
     });
 
-    provider.chat('gpt-4o');
+    provider.chat('sap-aicore/gpt-4o');
 
     const [modelId] = openAiModelMock.mock.calls[0]!;
     expect(modelId).toBe('gpt-4o');
