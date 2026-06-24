@@ -40,8 +40,8 @@ pnpm run format:check # Check formatting
 ```bash
 pnpm --filter basic-example start
 pnpm --filter streaming-example start
-pnpm --filter mastra-agents-example start
-pnpm --filter openai-agents-example start
+pnpm --filter mastra-agents start
+pnpm --filter openai-agents start
 ```
 
 ## Contributing
