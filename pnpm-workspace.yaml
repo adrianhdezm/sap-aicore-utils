@@ -5,15 +5,15 @@ packages:
   - tools/*
 
 catalog:
-  '@types/node': ^24.12.2
-  '@arethetypeswrong/cli': ^0.18.2
+  '@types/node': ^24.13.3
+  '@arethetypeswrong/cli': ^0.18.5
   '@eslint/js': ^10.0.1
   ai: ^6.0.209
-  eslint: ^10.5.0
+  eslint: ^10.7.0
   eslint-config-prettier: ^10.1.8
   eslint-plugin-prettier: ^5.5.5
   globals: ^17.6.0
-  prettier: ^3.8.3
+  prettier: ^3.9.6
   tsup: ^8.5.1
   tsx: ^4.20.6
   typescript: ^5.9.3
