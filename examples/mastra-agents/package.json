@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@ai-foundry/sap-aicore-provider": "workspace:*",
-    "@mastra/core": "^1.46.0",
-    "@mastra/evals": "^1.4.0",
-    "@mastra/memory": "^1.21.1",
+    "@mastra/core": "^1.55.0",
+    "@mastra/evals": "^1.6.0",
+    "@mastra/memory": "^1.24.0",
     "ai": "catalog:",
     "zod": "^4.4.3"
   },
