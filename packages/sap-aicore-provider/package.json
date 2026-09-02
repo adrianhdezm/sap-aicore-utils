@@ -53,6 +53,6 @@
     "@ai-sdk/openai-compatible": "^2.0.51",
     "@ai-sdk/provider": "^3.0.10",
     "@ai-sdk/provider-utils": "^4.0.30",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   }
 }
